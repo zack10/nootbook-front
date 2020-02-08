@@ -115,6 +115,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "nootbook-front"
+    }
+  },
+  "defaultProject": "nootbook-front",
+  "cli": {
+    "analytics": "750b0ecf-f664-464f-91ca-356ee2e5d073"
+  }
 }
