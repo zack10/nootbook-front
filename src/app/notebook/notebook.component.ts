@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CodeModal} from './modals/codeModal';
 import {NotebookService} from './notebook.service';
 import {ResultModal} from './modals/resultModal';
-import {faArrowRight, faTerminal, faEquals, faTrashAlt, faCogs} from '@fortawesome/free-solid-svg-icons';
+import {faArrowRight, faTerminal, faEquals, faTrashAlt, faCogs, faAngleDoubleRight} from '@fortawesome/free-solid-svg-icons';
 import {CodeResultModal} from './modals/codeResultModal';
 
 @Component({
@@ -14,11 +14,11 @@ export class NotebookComponent implements OnInit {
   codeObj: CodeModal;
   result: ResultModal;
   codeResults: CodeResultModal[] = [];
-  faArrowRight = faArrowRight;
   faTerminal = faTerminal;
   faEquals = faEquals;
   faTrashAlt = faTrashAlt
   faCogs = faCogs;
+  faAngleDoubleRight = faAngleDoubleRight;
   constructor(private notebookService: NotebookService) { }
 
   ngOnInit() {

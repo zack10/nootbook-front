@@ -10,7 +10,10 @@ export class NotebookService {
 
   private url = 'http://localhost:8080/oracle/notebook/execute';  // URL to web api
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    }),
+    withCredentials: true
   };
 
   constructor(private http: HttpClient) { }
