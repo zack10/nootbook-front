@@ -29,6 +29,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
           console.log('event--->>>', event);
         }
         return event;
-      }));
+      })
+    );
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CodeModal} from './modals/codeModal';
 import {NotebookService} from './notebook.service';
 import {ResultModal} from './modals/resultModal';
-import {faArrowRight, faTerminal, faEquals, faTrashAlt, faCogs, faAngleDoubleRight} from '@fortawesome/free-solid-svg-icons';
+import {faTerminal, faTrashAlt, faCogs, faAngleDoubleRight} from '@fortawesome/free-solid-svg-icons';
 import {CodeResultModal} from './modals/codeResultModal';
 
 @Component({
@@ -15,10 +15,10 @@ export class NotebookComponent implements OnInit {
   result: ResultModal;
   codeResults: CodeResultModal[] = [];
   faTerminal = faTerminal;
-  faEquals = faEquals;
-  faTrashAlt = faTrashAlt
+  faTrashAlt = faTrashAlt;
   faCogs = faCogs;
   faAngleDoubleRight = faAngleDoubleRight;
+  alert = 'alert-primary';
   constructor(private notebookService: NotebookService) { }
 
   ngOnInit() {
@@ -30,11 +30,17 @@ export class NotebookComponent implements OnInit {
 
   execute(code: string): void {
     this.codeObj = new CodeModal(code);
-    this.notebookService.execute(this.codeObj).subscribe(res => {
-      this.result = res;
-      this.codeResults.push(new CodeResultModal(code.substring(8), res.result));
-    });
-    console.log(this.codeObj.code);
+    this.notebookService.execute(this.codeObj).subscribe(
+      res => {
+        this.result = res;
+        this.alert = 'alert-primary';
+        this.codeResults.push(new CodeResultModal(code.substring(8), res.result));
+      },
+      error => {
+        this.alert = 'alert-danger';
+        this.codeResults.push(new CodeResultModal(code.substring(8), error.error.message.toString()));
+        console.error(error.error.message.toString());
+      }
+    );
   }
-
 }

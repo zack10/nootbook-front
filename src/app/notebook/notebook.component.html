@@ -2,7 +2,7 @@
   <div class="col-md-12">
     <form (keydown.enter)="$event.preventDefault()">
       <div class="form-group">
-        <label for="exampleFormControlTextarea1">write your python code : </label>
+        <label for="exampleFormControlTextarea1">Write your python code : </label>
         <input class="form-control" #editor id="exampleFormControlTextarea1" required="required" (keyup.enter)="execute('%python '+editor.value)" placeholder="Start hacking" rows="3" style="height: 3em;font-size: 18px;"/>
       </div>
       <button type="button" class="interpret btn btn-primary btn-lg" (click)="execute('%python '+editor.value)" > <fa-icon [icon]="faCogs"></fa-icon> Interpret</button>
@@ -10,9 +10,9 @@
     </form>
   </div>
   <div class="output col-md-12" *ngIf="codeResults.length > 0">
-    <div class="alert alert-primary" role="alert">
+    <div class="alert {{alert}}" role="alert">
       <div *ngFor="let item of codeResults">
-          <fa-icon [icon]="faTerminal"></fa-icon> <b><code style="font-size: 20px;"> {{item.code}} </code></b> <fa-icon [icon]="faAngleDoubleRight"></fa-icon> <span style="font-size: 20px;"> &nbsp;{{item.result}} </span>
+          <fa-icon [icon]="faTerminal"></fa-icon> <b><code style="font-size: 20px;"> {{item.code}} </code></b> <br> &nbsp;&nbsp; <fa-icon [icon]="faAngleDoubleRight"></fa-icon> <span style="font-size: 20px;"> &nbsp;{{item.result}} </span>
       </div>
     </div>
   </div>
