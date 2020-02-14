@@ -3,15 +3,21 @@
     <form (keydown.enter)="$event.preventDefault()">
       <div class="form-group">
         <label for="exampleFormControlTextarea1">Write your python code : </label>
-        <input class="form-control" formControlName="notbook" #editor id="exampleFormControlTextarea1" required="required" (keyup.enter)="execute('%python '+editor.value)" placeholder="Start hacking" rows="3" style="height: 3em;font-size: 18px;"/>
+        <input class="form-control" #editor id="exampleFormControlTextarea1" required="required" (keyup.enter)="execute(editor.value)" placeholder="Start hacking" rows="3" style="height: 3em;font-size: 18px;"/>
       </div>
-      <button type="button" class="interpret btn btn-primary btn-lg" (click)="execute('%python '+editor.value)" >
+      <button type="button" class="interpret btn btn-primary btn-lg" (click)="execute(editor.value)">
         <fa-icon [icon]="faCogs"></fa-icon> Interpret
       </button>
       <button type="reset" class="reset btn btn-primary btn-lg" (click)="reset()">
         <fa-icon [icon]="faTrashAlt"></fa-icon> Reset
       </button>
     </form>
+    <div *ngIf="errors" class="alert alert-danger alert-dismissible fade show required-input" role="alert">
+      <strong> <fa-icon [icon]="faExclamationTriangle"></fa-icon></strong> This field is required.
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
     <div class="col-md-12 spinner-container" *ngIf="showSpinner">
       <span class="spinner-grow text-primary" role="status"></span>
       <span class="spinner-grow text-secondary" role="status"></span>
