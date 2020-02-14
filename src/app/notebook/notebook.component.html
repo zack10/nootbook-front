@@ -3,13 +3,28 @@
     <form (keydown.enter)="$event.preventDefault()">
       <div class="form-group">
         <label for="exampleFormControlTextarea1">Write your python code : </label>
-        <input class="form-control" #editor id="exampleFormControlTextarea1" required="required" (keyup.enter)="execute('%python '+editor.value)" placeholder="Start hacking" rows="3" style="height: 3em;font-size: 18px;"/>
+        <input class="form-control" formControlName="notbook" #editor id="exampleFormControlTextarea1" required="required" (keyup.enter)="execute('%python '+editor.value)" placeholder="Start hacking" rows="3" style="height: 3em;font-size: 18px;"/>
       </div>
-      <button type="button" class="interpret btn btn-primary btn-lg" (click)="execute('%python '+editor.value)" > <fa-icon [icon]="faCogs"></fa-icon> Interpret</button>
-      <button type="reset" class="reset btn btn-primary btn-lg" (click)="reset()"> <fa-icon [icon]="faTrashAlt"></fa-icon> Reset</button>
+      <button type="button" class="interpret btn btn-primary btn-lg" (click)="execute('%python '+editor.value)" >
+        <fa-icon [icon]="faCogs"></fa-icon> Interpret
+      </button>
+      <button type="reset" class="reset btn btn-primary btn-lg" (click)="reset()">
+        <fa-icon [icon]="faTrashAlt"></fa-icon> Reset
+      </button>
     </form>
+    <div class="col-md-12 spinner-container" *ngIf="showSpinner">
+      <span class="spinner-grow text-primary" role="status"></span>
+      <span class="spinner-grow text-secondary" role="status"></span>
+      <span class="spinner-grow text-success" role="status"></span>
+      <span class="spinner-grow text-danger" role="status"></span>
+      <span class="spinner-grow text-warning" role="status"></span>
+      <span class="spinner-grow text-info" role="status"></span>
+      <span class="spinner-grow text-light" role="status"></span>
+      <span class="spinner-grow text-dark" role="status"></span>
+    </div>
   </div>
   <div class="output col-md-12" *ngIf="codeResults.length > 0">
+    <div class="dropdown-divider"></div>
     <div class="alert {{alert}}" role="alert">
       <div *ngFor="let item of codeResults">
           <fa-icon [icon]="faTerminal"></fa-icon> <b><code style="font-size: 20px;"> {{item.code}} </code></b> <br> &nbsp;&nbsp; <fa-icon [icon]="faAngleDoubleRight"></fa-icon> <span style="font-size: 20px;"> &nbsp;{{item.result}} </span>

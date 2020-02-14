@@ -19,6 +19,7 @@ export class NotebookComponent implements OnInit {
   faCogs = faCogs;
   faAngleDoubleRight = faAngleDoubleRight;
   alert = 'alert-primary';
+  showSpinner = false;
   constructor(private notebookService: NotebookService) { }
 
   ngOnInit() {
@@ -30,15 +31,18 @@ export class NotebookComponent implements OnInit {
 
   execute(code: string): void {
     this.codeObj = new CodeModal(code);
+    this.showSpinner = true;
     this.notebookService.execute(this.codeObj).subscribe(
       res => {
         this.result = res;
         this.alert = 'alert-primary';
         this.codeResults.push(new CodeResultModal(code.substring(8), res.result));
+        this.showSpinner = false;
       },
       error => {
         this.alert = 'alert-danger';
         this.codeResults.push(new CodeResultModal(code.substring(8), error.error.message.toString()));
+        this.showSpinner = false;
         console.error(error.error.message.toString());
       }
     );

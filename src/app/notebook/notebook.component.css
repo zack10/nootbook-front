@@ -4,3 +4,10 @@
 .interpret {
   margin-right: 1em;
 }
+.dropdown-divider {
+  margin-bottom: 1.5em;
+}
+.spinner-container {
+  margin-top: 1em;
+  left: -1em;
+}
