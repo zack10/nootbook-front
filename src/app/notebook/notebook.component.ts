@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {CodeModal} from './modals/codeModal';
-import {NotebookService} from './notebook.service';
-import {ResultModal} from './modals/resultModal';
-import {faTerminal, faTrashAlt, faCogs, faAngleDoubleRight, faExclamationTriangle} from '@fortawesome/free-solid-svg-icons';
-import {CodeResultModal} from './modals/codeResultModal';
+import { CodeModal } from './modals/codeModal';
+import { NotebookService } from './notebook.service';
+import { ResultModal } from './modals/resultModal';
+import {
+  faTerminal,
+  faTrashAlt,
+  faCogs,
+  faAngleDoubleRight,
+  faExclamationTriangle
+} from '@fortawesome/free-solid-svg-icons';
+import { CodeResultModal } from './modals/codeResultModal';
 
 @Component({
   selector: 'app-notebook',
@@ -24,13 +30,16 @@ export class NotebookComponent implements OnInit {
   errors = false;
   constructor(private notebookService: NotebookService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   reset(): void {
     this.codeResults = [];
   }
 
+  /**
+   * execute python code
+   * @param code
+   */
   execute(code: string): void {
     const pythonInterpreter = '%python ';
     if (code) {
@@ -42,12 +51,19 @@ export class NotebookComponent implements OnInit {
         res => {
           this.result = res;
           this.alert = 'alert-primary';
-          this.codeResults.push(new CodeResultModal(instruction.substring(8), res.result));
+          this.codeResults.push(
+            new CodeResultModal(instruction.substring(8), res.result)
+          );
           this.showSpinner = false;
         },
         error => {
           this.alert = 'alert-danger';
-          this.codeResults.push(new CodeResultModal(instruction.substring(8), error.error.message.toString()));
+          this.codeResults.push(
+            new CodeResultModal(
+              instruction.substring(8),
+              error.error.message.toString()
+            )
+          );
           this.showSpinner = false;
         }
       );

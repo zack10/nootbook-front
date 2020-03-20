@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {CodeModal} from './modals/codeModal';
-import {Observable} from 'rxjs';
-import {environment} from '../../environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { CodeModal } from './modals/codeModal';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,10 @@ export class NotebookService {
 
   constructor(private http: HttpClient) { }
 
+  /**
+   * execute python code
+   * @param code
+   */
   execute(code: CodeModal): Observable<any> {
     return this.http.post(this.url + 'execute', code, this.httpOptions);
   }

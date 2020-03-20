@@ -4,12 +4,17 @@ import {
 } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import {map} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 /** Inject With Credentials into the request */
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
 
+  /**
+   * intercept all outgoing http requests
+   * @param request
+   * @param next
+   */
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token: string = localStorage.getItem('token');
 
